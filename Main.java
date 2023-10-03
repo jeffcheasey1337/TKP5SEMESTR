@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Лабораторные работы по ТКП Дмитриев Илья 211-723");
-        primaryStage.setScene(new Scene(root, 800, 675));
+        primaryStage.setScene(new Scene(root, 750, 550));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
