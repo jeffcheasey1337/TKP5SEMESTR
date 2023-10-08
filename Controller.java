@@ -1,5 +1,8 @@
 package sample;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 
@@ -155,7 +159,7 @@ public class Controller {
             );
 
             if (arrayTypeChoice == 0) {
-                
+                // Выбрано одномерное задание
                 String[] taskOptions = {"1. Задание 1", "2. Задание 2"};
                 int taskChoice = JOptionPane.showOptionDialog(
                         null,
@@ -170,21 +174,21 @@ public class Controller {
 
                 if (taskChoice == 0) {
                     Random random = new Random();
-                    
-                   
-                    int[] array = new int[10]; 
+                    // Выбрано первое задание для одномерного массива
+                    // Генерируем случайный массив чисел
+                    int[] array = new int[10]; // Измените размер массива по вашему усмотрению
                     for (int i = 0; i < array.length; i++) {
-                        array[i] = random.nextInt(100); 
+                        array[i] = random.nextInt(100); // Генерируйте числа в нужном диапазоне
                     }
 
-                   
+                    // Запрашиваем у пользователя числа a и b
                     int a = Integer.parseInt(JOptionPane.showInputDialog("Введите число a: "));
                     int b = Integer.parseInt(JOptionPane.showInputDialog("Введите число b: "));
 
-                    
+                    // Создаем копию массива для сохранения исходного состояния
                     int[] originalArray = Arrays.copyOf(array, array.length);
 
-                    
+                    // Заменяем элементы массива, удовлетворяющие условию
                     for (int i = a; i <= b; i++) {
                         if (i >= 0 && i < array.length && array[i] % 2 == 0) {
                             if (i == 0) {
@@ -197,26 +201,26 @@ public class Controller {
                         }
                     }
 
-                   
+                    // Выводим оба массива в отдельном окне
                     JOptionPane.showMessageDialog(null,
                             "Исходный массив: " + Arrays.toString(originalArray) +
                                     "\nНовый массив: " + Arrays.toString(array),
                             "Результат",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else if (taskChoice == 1) {
-                    
+                    // Выбрано второе задание для одномерного массива
                     Random random = new Random();
 
-                    
-                    int size = 10;
+                    // Задайте размер массива
+                    int size = 10; // Измените размер массива по вашему усмотрению
 
-                   
+                    // Создайте и заполните массив случайными числами
                     int[] array = new int[size];
                     for (int i = 0; i < size; i++) {
-                        array[i] = random.nextInt(100);
+                        array[i] = random.nextInt(100); // Генерируйте числа в нужном диапазоне
                     }
 
-                  
+                    // Подсчет количества четных элементов на четных позициях
                     int count = 0;
                     for (int i = 0; i < size; i += 2) {
                         if (array[i] % 2 == 0) {
@@ -224,7 +228,7 @@ public class Controller {
                         }
                     }
 
-                    
+                    // Вывод результата в отдельном окне
                     JOptionPane.showMessageDialog(null,
                             "Сгенерированный массив: " + java.util.Arrays.toString(array) +
                                     "\nКоличество четных элементов на четных позициях: " + count,
@@ -232,7 +236,7 @@ public class Controller {
                             JOptionPane.INFORMATION_MESSAGE);
                 }
             } else if (arrayTypeChoice == 1) {
-               
+                // Выбрано двумерное задание
                 String[] taskOptions = {"1. Задание 1", "2. Задание 2"};
                 int taskChoice = JOptionPane.showOptionDialog(
                         null,
@@ -246,11 +250,11 @@ public class Controller {
                 );
 
                 if (taskChoice == 0) {
-                    
+                    // Выбрано первое задание для двумерного массива
                     System.out.println("Выбрано первое задание для двумерного массива");
 
                     int size = Integer.parseInt(JOptionPane.showInputDialog("Введите размер магического квадрата: "));
-                    int[][] magicSquare = new int[size][size]; 
+                    int[][] magicSquare = new int[size][size]; // Исправление здесь
                     int row = 0;
                     int col = size / 2;
 
@@ -288,7 +292,7 @@ public class Controller {
                         frame.setVisible(true);
                     });
                 } else if (taskChoice == 1) {
-                    
+                    // Выбрано второе задание для двумерного массива
                     String[] inputOptions = {"1. Ввести матрицу вручную", "2. Автоматическое заполнение"};
                     int inputChoice = JOptionPane.showOptionDialog(
                             null,
@@ -303,25 +307,25 @@ public class Controller {
 
                     int size = Integer.parseInt(JOptionPane.showInputDialog("Введите размер квадратной матрицы: "));
 
-                    
+                    // Создаем квадратную матрицу и заполняем ее
                     int[][] matrix = new int[size][size];
                     if (inputChoice == 0) {
-                       
+                        // Ввод матрицы вручную
                         for (int i = 0; i < size; i++) {
                             for (int j = 0; j < size; j++) {
                                 matrix[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Введите элемент матрицы [" + i + "][" + j + "]: "));
                             }
                         }
                     } else {
-                        
+                        // Автоматическое заполнение случайными числами
                         for (int i = 0; i < size; i++) {
                             for (int j = 0; j < size; j++) {
-                                matrix[i][j] = (int) (Math.random() * 100); 
+                                matrix[i][j] = (int) (Math.random() * 100); // Здесь генерируйте числа в нужном диапазоне
                             }
                         }
                     }
 
-                    
+                    // Выводим матрицу для главной диагонали
                     JFrame mainDiagonalFrame = new JFrame("Матрица (Главная диагональ)");
                     mainDiagonalFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     mainDiagonalFrame.setSize(300, 300);
@@ -342,7 +346,7 @@ public class Controller {
                     mainDiagonalFrame.add(new JScrollPane(mainDiagonalTextArea));
                     mainDiagonalFrame.setVisible(true);
 
-                   
+                    // Выводим матрицу для побочной диагонали
                     JFrame secondaryDiagonalFrame = new JFrame("Матрица (Побочная диагональ)");
                     secondaryDiagonalFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     secondaryDiagonalFrame.setSize(300, 300);
@@ -363,7 +367,7 @@ public class Controller {
                     secondaryDiagonalFrame.add(new JScrollPane(secondaryDiagonalTextArea));
                     secondaryDiagonalFrame.setVisible(true);
 
-                    
+                    // Выводим всю матрицу в отдельном окне
                     JFrame matrixFrame = new JFrame("Матрица (Вся матрица)");
                     matrixFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     matrixFrame.setSize(400, 400);
@@ -453,13 +457,13 @@ public class Controller {
                 frame.setVisible(true);
             }
           else  if (arrayTypeChoice == 2){
-               
+                // Ввод текста из окна
                 String text = JOptionPane.showInputDialog("Введите текст:");
 
-                
+                // Разделение текста на слова
                 String[] words = text.split("\\s+");
 
-               
+                // Запрос пользователя о способе вывода
                 int choice = JOptionPane.showOptionDialog(
                         null,
                         "Выберите способ вывода:",
@@ -472,12 +476,12 @@ public class Controller {
                 );
 
                 if (choice == JOptionPane.YES_OPTION) {
-                 
+                    // Вывод текста в консоли
                     for (String word : words) {
                         System.out.println(word);
                     }
                 } else {
-                   
+                    // Вывод текста в окне
                     StringBuilder resultText = new StringBuilder("Слова из текста:\n");
                     for (String word : words) {
                         resultText.append(word).append("\n");
@@ -509,30 +513,30 @@ public class Controller {
                 });
             }
            else if (arrayTypeChoice == 4){
-               
+                // Устанавливаем начальную и конечную даты интервала времени
                 Calendar startDate = Calendar.getInstance();
-                startDate.set(2023, Calendar.JANUARY, 1); 
+                startDate.set(2023, Calendar.JANUARY, 1); // Начальная дата
                 Calendar endDate = Calendar.getInstance();
-                endDate.set(2023, Calendar.DECEMBER, 31); 
+                endDate.set(2023, Calendar.DECEMBER, 31); // Конечная дата
 
-               
+                // Создаем экземпляр класса Random для генерации случайной даты в интервале
                 Random random = new Random();
 
-                
+                // Генерируем случайную дату в заданном интервале времени
                 long startTimeInMillis = startDate.getTimeInMillis();
                 long endTimeInMillis = endDate.getTimeInMillis();
                 long randomTimeInMillis = startTimeInMillis + (long) (random.nextDouble() * (endTimeInMillis - startTimeInMillis));
                 Calendar randomDate = Calendar.getInstance();
                 randomDate.setTimeInMillis(randomTimeInMillis);
 
-               
+                // Определяем день недели для сгенерированной даты
                 int dayOfWeek = randomDate.get(Calendar.DAY_OF_WEEK);
 
-                
+                // Преобразуем числовое значение дня недели в строку
                 String[] daysOfWeek = {"Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"};
-                String dayOfWeekStr = daysOfWeek[dayOfWeek - 1]; 
+                String dayOfWeekStr = daysOfWeek[dayOfWeek - 1]; // -1, так как нумерация начинается с воскресенья
 
-                
+                // Выводим результат
 
                 JOptionPane.showMessageDialog(null, "Случайная дата: " + randomDate.getTime() + "\nДень недели: " + dayOfWeekStr);
 
@@ -545,7 +549,7 @@ public class Controller {
 
                 JPanel panel = new JPanel(new BorderLayout());
 
-               
+                // Группа Radio-кнопок для выбора режима ввода
                 JPanel radioPanel = new JPanel();
                 JRadioButton randomButton = new JRadioButton("Случайная дата");
                 JRadioButton manualButton = new JRadioButton("Ввести вручную");
@@ -556,7 +560,7 @@ public class Controller {
                 radioPanel.add(manualButton);
                 panel.add(radioPanel, BorderLayout.NORTH);
 
-               
+                // Панель для ввода даты
                 JPanel inputPanel = new JPanel(new GridLayout(3, 2));
                 JTextField yearField = new JTextField(4);
                 JTextField monthField = new JTextField(2);
@@ -569,11 +573,11 @@ public class Controller {
                 inputPanel.add(dayField);
                 panel.add(inputPanel, BorderLayout.CENTER);
 
-                
+                // Кнопка для показа результата
                 JButton submitButton = new JButton("Показать формат");
                 panel.add(submitButton, BorderLayout.SOUTH);
 
-               
+                // Обработчик выбора режима ввода
                 randomButton.addActionListener(e -> {
                     yearField.setEnabled(false);
                     monthField.setEnabled(false);
@@ -586,14 +590,14 @@ public class Controller {
                     dayField.setEnabled(true);
                 });
 
-              
+                // Обработчик нажатия кнопки
                 submitButton.addActionListener(e -> {
                     if (randomButton.isSelected()) {
-                        
+                        // Генерация случайной даты
                         Random random = new Random();
-                        int year = 1900 + random.nextInt(100); 
-                        int month = 1 + random.nextInt(12); 
-                        int day = 1 + random.nextInt(31); 
+                        int year = 1900 + random.nextInt(100); // Год от 1900 до 1999
+                        int month = 1 + random.nextInt(12); // Месяц от 1 до 12
+                        int day = 1 + random.nextInt(31); // День от 1 до 31
                         String formattedDate = year + ", " + month + ", " + day;
                         JOptionPane.showMessageDialog(null, "Дата в формате год, месяц, день месяца: " + formattedDate);
                     } else if (manualButton.isSelected()) {
@@ -616,7 +620,7 @@ public class Controller {
                     }
                 });
 
-                
+                // По умолчанию выбран режим случайной даты
                 randomButton.setSelected(true);
                 yearField.setEnabled(false);
                 monthField.setEnabled(false);
@@ -718,7 +722,7 @@ public class Controller {
 
                 Aircraft[] aircrafts;
                 if (taskChoice == 1) {
-                    
+                    // Автоматический ввод
                     aircrafts = new Aircraft[]{
                             new Airplane(),
                             new Airplane(),
@@ -727,7 +731,7 @@ public class Controller {
                             new Helicopter()
                     };
                 } else if (taskChoice == 2) {
-                   
+                    // Ввод вручную
                     int numAircrafts = Integer.parseInt(JOptionPane.showInputDialog("Введите количество летательных аппаратов:"));
                     aircrafts = new Aircraft[numAircrafts];
                     for (int i = 0; i < numAircrafts; i++) {
@@ -756,20 +760,20 @@ public class Controller {
             }
         });
         getData5.setOnAction(event ->{
-
-           JOptionPane.showMessageDialog(null, "В случае не вывода JavaDoc документа, ужно зайти ввв файл Controller.java, и ввести путь к файлу Main.html, который лежит в архиве", "Сообшение для корректной работы", JOptionPane.ERROR_MESSAGE );
+            JOptionPane.showMessageDialog(null, "В случае не вывода JavaDoc документа, ужно зайти ввв файл Controller.java, и ввести путь к файлу Main.html, который лежит в архиве", "Сообшение для корректной работы", JOptionPane.ERROR_MESSAGE );
+            // Путь к HTML-файлу
             String filePath = "E:\\VseLabyNew\\src\\sample\\jvadoc\\sample\\Main.html";
 
-           
+            // Создаем объект Desktop
             Desktop desktop = Desktop.getDesktop();
 
             try {
-               
+                // Проверяем поддерживается ли открытие файлов на данной платформе
                 if (desktop.isSupported(Desktop.Action.OPEN)) {
-                   
+                    // Создаем объект File для HTML-файла
                     File htmlFile = new File(filePath);
 
-                  
+                    // Открываем HTML-файл в браузере по умолчанию
                     desktop.open(htmlFile);
                 } else {
                     System.out.println("Открытие файлов не поддерживается на данной платформе.");
@@ -779,7 +783,7 @@ public class Controller {
             }
         });
         getData6.setOnAction(event ->{
-          
+            // Показать диалоговое окно для выбора способа ввода
             String[] inputOptions = {"Ввести данные вручную", "Заполнить случайными значениями"};
             int inputChoice = JOptionPane.showOptionDialog(
                     null,
@@ -792,7 +796,7 @@ public class Controller {
                     inputOptions[0]
             );
 
-          
+            // Переменные для хранения данных о фигурах
             String triangleColor;
             double triangleBase;
             double triangleHeight;
@@ -802,24 +806,24 @@ public class Controller {
             double circleRadius;
 
             if (inputChoice == 0) {
-              
+                // Ввод данных вручную
 
-                
+                // Ввод цвета и размеров треугольника с клавиатуры
                 triangleColor = JOptionPane.showInputDialog("Введите цвет треугольника:");
                 triangleBase = Double.parseDouble(JOptionPane.showInputDialog("Введите основание треугольника:"));
                 triangleHeight = Double.parseDouble(JOptionPane.showInputDialog("Введите высоту треугольника:"));
 
-                
+                // Ввод цвета и размеров квадрата с клавиатуры
                 squareColor = JOptionPane.showInputDialog("Введите цвет квадрата:");
                 squareSide = Double.parseDouble(JOptionPane.showInputDialog("Введите длину стороны квадрата:"));
 
-                
+                // Ввод цвета и размеров круга с клавиатуры
                 circleColor = JOptionPane.showInputDialog("Введите цвет круга:");
                 circleRadius = Double.parseDouble(JOptionPane.showInputDialog("Введите радиус круга:"));
             } else {
-                
+                // Автоматическое заполнение случайными значениями
 
-               
+                // Массив из случайных названий цветов
                 String[] colorNames = {
                         "Красный", "Синий", "Зеленый", "Желтый", "Оранжевый",
                         "Фиолетовый", "Розовый", "Серый", "Черный", "Белый"
@@ -827,7 +831,7 @@ public class Controller {
 
                 Random random = new Random();
 
-               
+                // Случайный индекс в массиве colorNames для выбора случайного названия цвета
                 int randomIndex = random.nextInt(colorNames.length);
                 triangleColor = colorNames[randomIndex];
                 triangleBase = Math.random() * 10 + 1;
@@ -842,22 +846,22 @@ public class Controller {
                 circleRadius = Math.random() * 10 + 1;
             }
 
-            
+            // Создание объектов геометрических фигур с введенными данными
             Triangle triangle = new Triangle(triangleColor, triangleBase, triangleHeight);
             Square square = new Square(squareColor, squareSide);
             Circle circle = new Circle(circleColor, circleRadius);
 
-            
+            // Вычисление площади треугольника и вывод информации с заголовком
             triangle.calculateArea();
             triangle.displayInfo("Площадь треугольника");
 
-            
+            // Вывод информации о квадрате и круге с заголовками
             square.displayInfo("Площадь квадрата");
             circle.displayInfo("Площадь круга");
 
 
 
-            
+            // Показать диалоговое окно для выбора операции
             String[] options = {"Сложение", "Вычитание", "Умножение", "Деление"};
             int selectedOption = JOptionPane.showOptionDialog(
                     null,
@@ -872,7 +876,7 @@ public class Controller {
 
             double result = 0;
 
-           
+            // Выполнение выбранной операции
             if (selectedOption == 0) {
                 // Сложение
                 result = square.area + circle.area;
@@ -892,9 +896,8 @@ public class Controller {
                 }
             }
 
-        
+            // Вывести результат операции
             JOptionPane.showMessageDialog(null, "Результат операции: " + result);
-       
         });
         getData7.setOnAction(event ->{
             String[] arrayTypeOptions = {"Задание 1(после вывода окна поятните для изменения размера чтобы увидеть текст)", "Задание 2"};
@@ -911,18 +914,18 @@ public class Controller {
             );
 
             if (arrayTypeChoice == 0) {
-                
+                // Создаем главное окно (JFrame)
                 JFrame frame = new JFrame("Сообщение");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-                frame.setSize(800, 600);
-                frame.setVisible(true); 
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Завершение приложения при закрытии окна
+                frame.setSize(800, 600); // Устанавливаем размер окна
+                frame.setVisible(true); // Делаем окно видимым
 
-                
+                // Создаем панель (JPanel) для размещения компонентов
                 JPanel panel = new JPanel();
                 BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
                 panel.setLayout(boxLayout);
 
-               
+                // Создаем текстовую область (JTextArea) с начальным текстом
                 JTextArea messageTextArea = new JTextArea(
                         "1. JFrame:\n" +
                                 "   • Класс для создания главного окна приложения.\n" +
@@ -969,16 +972,16 @@ public class Controller {
                                 "17. BoxLayout:\n" +
                                 "    • Менеджер компоновки, который управляет расположением компонентов по вертикали или горизонтали.");
 
-                messageTextArea.setEditable(false); 
+                messageTextArea.setEditable(false); // Делаем текстовую область только для чтения
 
-               
+                // Добавляем текстовую область на панель
                 panel.add(messageTextArea);
 
-               
+                // Создаем панель прокрутки и добавляем текстовую область в нее
                 JScrollPane scrollPane = new JScrollPane(messageTextArea);
                 panel.add(scrollPane);
 
-               
+                // Добавляем панель на главное окно
                 frame.add(panel);
             }
             else if (arrayTypeChoice == 1){
@@ -1047,6 +1050,8 @@ public class Controller {
 
                 frame.setVisible(true);
             }
+
+
         });
         getData8.setOnAction(event ->{
             String[] arrayTypeOptions = {"Задание 1(после вывода окна поятните для изменения размера чтобы увидеть текст)", "Задание 2"};
@@ -1061,18 +1066,18 @@ public class Controller {
                     arrayTypeOptions,
                     arrayTypeOptions[0]
             );
-            if (arrayTypeChoice == 0) {  
+            if (arrayTypeChoice == 0) {  // Создаем главное окно (JFrame)
                 JFrame frame = new JFrame("Сообщение");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-                frame.setSize(800, 600); 
-                frame.setVisible(true); 
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Завершение приложения при закрытии окна
+                frame.setSize(800, 600); // Устанавливаем размер окна
+                frame.setVisible(true); // Делаем окно видимым
 
-                
+                // Создаем панель (JPanel) для размещения компонентов
                 JPanel panel = new JPanel();
                 BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
                 panel.setLayout(boxLayout);
 
-                
+                // Создаем текстовую область (JTextArea) с начальным текстом
                 JTextArea messageTextArea = new JTextArea(
                         "Слушатель ChangeListener реагирует на изменение состояния объекта. Каждый\n" +
                                 "       элемент управления по-своему определяет понятие «изменение состояния».\n" +
@@ -1084,16 +1089,16 @@ public class Controller {
                                 "Слушатель MouseWheelListener оповещается при вращении колесика мыши в\n" +
                                 "       тот момент, когда данный компонент находится в фокусе.");
 
-                messageTextArea.setEditable(false); 
+                messageTextArea.setEditable(false); // Делаем текстовую область только для чтения
 
-                
+                // Добавляем текстовую область на панель
                 panel.add(messageTextArea);
 
-               
+                // Создаем панель прокрутки и добавляем текстовую область в нее
                 JScrollPane scrollPane = new JScrollPane(messageTextArea);
                 panel.add(scrollPane);
 
-                
+                // Добавляем панель на главное окно
                 frame.add(panel);}
 
             else if (arrayTypeChoice == 1){
@@ -1102,8 +1107,8 @@ public class Controller {
 
 
         }});
-        getData9.setOnAction(event ->{
-            SingUtilities.invokeLater(new Runnable() {
+        getData9.setOnAction(event -> {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     new DrawingApp();
@@ -1157,16 +1162,16 @@ class Airline {
     }
 }
 
-
+// Базовый класс - Машины
 class Cars {
 
-    
+    // Конструктор по умолчанию
     public Cars() {
 
     }
 }
 
-
+// Производный класс - Модель
 class Model extends Cars {
     private String modelName;
 
@@ -1179,7 +1184,7 @@ class Model extends Cars {
     }
 }
 
-
+// Производный класс - Год выпуска
 class YearOfManufacture extends Cars {
     private int year;
 
@@ -1192,7 +1197,7 @@ class YearOfManufacture extends Cars {
     }
 }
 
-
+// Класс Гараж
 class Garage {
     private List<Cars> carsList;
 
@@ -1200,24 +1205,24 @@ class Garage {
         carsList = new ArrayList<>();
     }
 
-   
+    // Добавление машины в гараж
     public void addCar(Cars car) {
         carsList.add(car);
     }
 
-    
+    // Удаление машины из гаража
     public void removeCar(Cars car) {
         carsList.remove(car);
     }
 
-   
+    // Фильтрация машин по типу (классу)
     public List<Cars> filterCarsByType(Class<? extends Cars> carType) {
         return carsList.stream()
                 .filter(carType::isInstance)
                 .collect(Collectors.toList());
     }
 
-   
+    // Вывод информации о машинах в отдельном окне
     public void showCarsInfo(List<Cars> cars) {
         StringBuilder message = new StringBuilder("Информация о машинах:\n");
         for (Cars car : cars) {
@@ -1232,7 +1237,7 @@ class Garage {
 
 }
 
-
+// Абстрактный класс Figure
 abstract class Figure {
      String color;
      double area;
@@ -1255,7 +1260,7 @@ abstract class Figure {
     public abstract void displayInfo();
 }
 
-
+// Классы для геометрических фигур
 class Triangle extends Figure {
     private double base;
     private double height;
@@ -1263,7 +1268,7 @@ class Triangle extends Figure {
         JOptionPane.showMessageDialog(null, "Треугольник: Цвет = " + color + ", Площадь = " + area, title, JOptionPane.INFORMATION_MESSAGE);
     }
     public Triangle(String color, double base, double height) {
-        super(color, 0); 
+        super(color, 0); // Площадь треугольника будет вычислена позже
         this.base = base;
         this.height = height;
     }
@@ -1273,7 +1278,7 @@ class Triangle extends Figure {
         JOptionPane.showMessageDialog(null, "Треугольник: Цвет = " + super.color + ", Площадь = " + super.area);
     }
 
-   
+    // Метод для вычисления площади треугольника
     public void calculateArea() {
         super.area = 0.5 * base * height;
     }
@@ -1312,16 +1317,16 @@ class Circle extends Figure {
     }
 }
 
-
+// Интерфейс для операций над площадями
 interface AreaOperation {
     double performOperation(double area1, double area2);
 }
 
-
+// Класс, выполняющий операции над площадями фигур
 class AreaCalculator implements AreaOperation {
     @Override
     public double performOperation(double area1, double area2) {
-        return area1 * area2; 
+        return area1 * area2; // Пример операции, можно заменить на другую
     }
 }
 
@@ -1386,7 +1391,7 @@ class AreaCalculator implements AreaOperation {
         });
         centerPanel.add(selectButtonForRadioButtons);
 
-        
+        // Добавление слушателя для кнопки, вывод текста в отдельном окне
         JTextField textField = new JTextField(20);
         JButton textButton = new JButton("Вывести текст в поле");
         textButton.addActionListener(e -> {
@@ -1398,7 +1403,7 @@ class AreaCalculator implements AreaOperation {
         textPanel.add(textButton);
         centerPanel.add(textPanel);
 
-        
+        // Добавление метки с изменением цвета фона при наведении
         JLabel mouseLabel = new JLabel("Наведите курсор мыши на эту метку");
         mouseLabel.setOpaque(true);
         mouseLabel.setBackground(Color.WHITE);
@@ -1417,7 +1422,7 @@ class AreaCalculator implements AreaOperation {
         });
         centerPanel.add(mouseLabel);
 
-        
+        // Добавление слушателя для изменения размера окна с помощью JSlider
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
         slider.setMajorTickSpacing(10);
         slider.setMinorTickSpacing(1);
@@ -1450,8 +1455,8 @@ class AreaCalculator implements AreaOperation {
     private JPanel shapePanel;
     private JComboBox<String> shapeComboBox;
     private JComboBox<String> colorComboBox;
-    private String selectedShape = "Круг"; 
-    private Color selectedColor = Color.BLUE;
+    private String selectedShape = "Круг"; // Фигура по умолчанию
+    private Color selectedColor = Color.BLUE; // Цвет по умолчанию
     private List<ShapeData> shapesData = new ArrayList<>();
     private ShapeData currentShapeData;
 
@@ -1463,7 +1468,7 @@ class AreaCalculator implements AreaOperation {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-               
+                // Рисование всех фигур
                 for (ShapeData shapeData : shapesData) {
                     g.setColor(shapeData.getColor());
                     int x = shapeData.getX();
@@ -1487,7 +1492,7 @@ class AreaCalculator implements AreaOperation {
                         int[] yPoints = {y + height / 2, y + height, y + height / 2, y, y};
                         g.fillPolygon(xPoints, yPoints, 5);
                     }
-                  
+                    // Добавьте другие фигуры здесь, например, шестиугольники, пятиугольники, овалы и так далее.
                 }
             }
         };
@@ -1615,7 +1620,7 @@ class AreaCalculator implements AreaOperation {
              case "Розовый":
                  return Color.PINK;
              case "Фиолетовый":
-                 return new Color(128, 0, 128); 
+                 return new Color(128, 0, 128); // Фиолетовый
              case "Голубой":
                  return Color.CYAN;
              case "Пурпурный":
@@ -1623,5 +1628,5 @@ class AreaCalculator implements AreaOperation {
              case "Черный":
                  return Color.BLACK;
              default:
-                 return Color.BLUE; 
+                 return Color.BLUE; // Цвет по умолчанию
         }}}
