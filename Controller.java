@@ -757,7 +757,7 @@ public class Controller {
         });
         getData5.setOnAction(event ->{
 
-           
+           JOptionPane.showMessageDialog(null, "В случае не вывода JavaDoc документа, ужно зайти ввв файл Controller.java, и ввести путь к файлу Main.html, который лежит в архиве", "Сообшение для корректной работы", JOptionPane.ERROR_MESSAGE );
             String filePath = "E:\\VseLabyNew\\src\\sample\\jvadoc\\sample\\Main.html";
 
            
